@@ -9,6 +9,6 @@ O projeto consiste em um jogo Jokenpô multiplayer implementado em Java, utiliza
 - [x] Informa aos jogadores quando é a vez de jogar, pontuação do jogo, desistência, encerramente ou outras mensagens.
 - [x] O jogo deve durar 10 jogadas, onde cada jogada vale 1 ponto.
 - [x] É informado aos jogadores as informações sobre pontuação total de todos os participantes
-- [ ] Se houver empate, os jogadores devem ser informados e jogar outra vez até desempatar;
-- [ ] O jogo encerra quando um dos jogadores atingir 10 pontos ou quando um deles digitar a palavra "sair"
-- [ ] Ao encerrrar o jogo, cada jogador deve ser informado sobre sua pontuação e também o jogador vencedor.
+- [x] Se houver empate, os jogadores devem ser informados e jogar outra vez até desempatar;
+- [x] O jogo encerra quando um dos jogadores atingir 10 pontos ou quando um deles digitar a palavra "sair"
+- [x] Ao encerrrar o jogo, cada jogador deve ser informado sobre sua pontuação e também o jogador vencedor.
