@@ -84,9 +84,9 @@ public class Servidor extends Thread {
             }
 
             if (jogador1.getPontos() < jogador2.getPontos()) {
-                System.out.println(jogador1.getNome() + " ganhou com " + jogador1.getPontos() + " pontos.");
-            } else if (jogador1.getPontos() > jogador2.getPontos()) {
                 System.out.println(jogador2.getNome() + " ganhou com " + jogador2.getPontos() + " pontos.");
+            } else if (jogador1.getPontos() > jogador2.getPontos()) {
+                System.out.println(jogador1.getNome() + " ganhou com " + jogador1.getPontos() + " pontos.");
             } else {
                 System.out.println("O jogo terminou em empate.");
             }
@@ -137,7 +137,8 @@ public class Servidor extends Thread {
         try {
             ServerSocket server = new ServerSocket(6000);
 
-            for (int i = 0; i < 2; i++) {
+            if(listaClientes.size()<2){
+             for (int i = 0; i < 2; i++) {
                 System.out.println("Esperando jogador " + (i + 1) + " se conectar...");
                 Socket conexao = server.accept();
                 Jogador jogador = new Jogador(conexao);
@@ -145,6 +146,12 @@ public class Servidor extends Thread {
 
                 System.out.println("Jogador " + (i + 1) + " se conectou.");
             }
+            
+            }else{
+               
+                server.close();
+            }
+           
 
             Thread threadJogo = new Servidor(listaClientes.get(0), listaClientes.get(1));
             threadJogo.start();
