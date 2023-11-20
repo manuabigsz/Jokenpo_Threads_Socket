@@ -43,17 +43,29 @@ public class Servidor extends Thread {
             jogador2.getResposta().println("Seu oponente é: " + jogador1.getNome());
 
             int rodadas = 0;
-            
-            while (rodadas < 10) {
+
+            while (rodadas < 10 && jogador1.getPontos() < 10 && jogador2.getPontos() < 10) {
                 jogador1.getResposta().println("Faca sua jogada, " + nomeJogador1);
 
                 String moveJogador1 = jogador1.getEntrada().readLine();
                 System.out.println(nomeJogador1 + " jogou: " + moveJogador1);
 
+                if (moveJogador1.equalsIgnoreCase("sair")) {
+                    jogador1.getResposta().println("Jogo encerrado a pedido de um dos jogadores.");
+                    jogador2.getResposta().println("Jogo encerrado a pedido de um dos jogadores.");
+                    break;
+                }
+
                 jogador2.getResposta().println("Faca sua jogada, " + nomeJogador2);
 
                 String moveJogador2 = jogador2.getEntrada().readLine();
                 System.out.println(nomeJogador2 + " jogou: " + moveJogador2);
+
+                if (moveJogador2.equalsIgnoreCase("sair")) {
+                    jogador1.getResposta().println("Jogo encerrado a pedido de um dos jogadores.");
+                    jogador2.getResposta().println("Jogo encerrado a pedido de um dos jogadores.");
+                    break;
+                }
 
                 String resultado = determinarVencedor(moveJogador1, moveJogador2, jogador1, jogador2);
                 jogador1.getResposta().println(resultado);
@@ -61,14 +73,22 @@ public class Servidor extends Thread {
 
                 jogador1.getResposta().println("Sua pontuação: " + jogador1.getPontos());
                 jogador2.getResposta().println("Sua pontuação: " + jogador2.getPontos());
-                
+
+                if (resultado.equals("Empate! Jogue novamente.")) {
+                    jogador1.getResposta().println("Empate! Jogando novamente...");
+                    jogador2.getResposta().println("Empate! Jogando novamente...");
+                    continue;
+                }
+
                 rodadas++;
             }
-            
-            if(jogador1.getPontos()<jogador2.getPontos()){
-                System.out.println(jogador1.getNome() + " ganhou com " + jogador1.getPontos());
-            }else{
-                System.out.println(jogador2.getNome() + " ganhou com " + jogador2.getPontos());
+
+            if (jogador1.getPontos() < jogador2.getPontos()) {
+                System.out.println(jogador1.getNome() + " ganhou com " + jogador1.getPontos() + " pontos.");
+            } else if (jogador1.getPontos() > jogador2.getPontos()) {
+                System.out.println(jogador2.getNome() + " ganhou com " + jogador2.getPontos() + " pontos.");
+            } else {
+                System.out.println("O jogo terminou em empate.");
             }
         } catch (Exception e) {
             e.printStackTrace();
